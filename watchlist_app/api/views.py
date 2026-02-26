@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from watchlist_app.models import WatchList, StreamPlatform, Review
 from watchlist_app.api.serializers import WatchListSerializer, StreamPlatformSerializer, ReviewSerializer
-from rest_framework import mixins
+# from rest_framework import mixins
 from rest_framework import generics
 
 # Function based view---------------------------
@@ -80,7 +80,13 @@ from rest_framework import generics
 
 # Using generic class based views
 class ReviewList(generics.ListCreateAPIView):
-    queryset = Review.objects.all()
+    #queryset = Review.objects.all()
+    # I need reviews of specific item
+    def get_queryset(self):
+        #keyword arguments
+        pk= self.kwargs['pk']
+        return Review.objects.filter(watchlist=pk)
+
     serializer_class = ReviewSerializer
 
 
