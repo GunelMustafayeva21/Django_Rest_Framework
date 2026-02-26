@@ -79,7 +79,7 @@ from rest_framework import generics
 #         return self.create(request, *args, **kwargs)
 
 # Using generic class based views
-class ReviewList(generics.ListCreateAPIView):
+class ReviewList(generics.ListAPIView):
     #queryset = Review.objects.all()
     # I need reviews of specific item
     def get_queryset(self):
@@ -89,6 +89,12 @@ class ReviewList(generics.ListCreateAPIView):
 
     serializer_class = ReviewSerializer
 
+class ReviewCreate(generics.CreateAPIView):
+    serializer_class = ReviewSerializer
+    def perform_create(self, serializer):
+        pk= self.kwargs['pk']
+        watchlist=WatchList.objects.get(pk=pk)
+        serializer.save(watchlist=watchlist)
 
 class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()

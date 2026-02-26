@@ -2,7 +2,7 @@ from django.urls import path
 # Function based view ----------------------------------------
 # from watchlist_app.api.views import movie_list, movie_details
 #-------------------------------------------------------------
-from watchlist_app.api.views import WatchListAV, WatchDetailsAV, StreamPlatformAV, StreamPlatformDetailsAV, ReviewList, ReviewDetails
+from watchlist_app.api.views import (WatchListAV, WatchDetailsAV, StreamPlatformAV, StreamPlatformDetailsAV, ReviewList, ReviewDetails, ReviewCreate)
 
 urlpatterns = [
     # Function based view--------------------------------------
@@ -14,5 +14,6 @@ urlpatterns = [
     path('stream/', StreamPlatformAV.as_view(), name='stream-platform-list'),
     path('stream/<int:pk>/', StreamPlatformDetailsAV.as_view(), name='stream-platform-details'),
     path('stream/<int:pk>/review/', ReviewList.as_view(), name='review-list'),
+    path('stream/<int:pk>/review-create/', ReviewCreate.as_view(), name='review-create'),
     path('stream/review/<int:pk>/', ReviewDetails.as_view(), name='review-details'),
 ]
