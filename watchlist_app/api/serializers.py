@@ -47,6 +47,12 @@ class WatchListSerializer(serializers.ModelSerializer):
 
 class StreamPlatformSerializer(serializers.ModelSerializer):
     watchlist= WatchListSerializer(many=True, read_only=True)
+    # Shows just what I return with __str__ method
+    # watchlist=serializers.StringRelatedField(many=True)
+    # Shows just primary keys of platform watchlist
+    # watchlist=serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # Shows related links of platform watchlist
+    # watchlist=serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='watch-details')
     
     class Meta:
         model=StreamPlatform
